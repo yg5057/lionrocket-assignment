@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { storage } from "../services/storage";
 import { Button } from "../components/ui/button";
@@ -17,9 +17,15 @@ import { useModal } from "../contexts/ModalContext";
 export default function Login() {
   const navigate = useNavigate();
   const { showAlert } = useModal();
-
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+
+  useEffect(() => {
+    const user = storage.getUser();
+    if (user) {
+      navigate("/dashboard", { replace: true });
+    }
+  }, [navigate]);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,7 +42,7 @@ export default function Login() {
       theme: "light",
     });
 
-    navigate("/dashboard");
+    navigate("/dashboard", { replace: true });
   };
 
   return (
