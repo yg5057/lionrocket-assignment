@@ -12,9 +12,12 @@ import {
   CardFooter,
   CardDescription,
 } from "../components/ui/card";
+import { useModal } from "../contexts/ModalContext";
 
 export default function Login() {
   const navigate = useNavigate();
+  const { showAlert } = useModal();
+
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
 
@@ -22,7 +25,7 @@ export default function Login() {
     e.preventDefault();
 
     if (!email || !name) {
-      alert("이메일과 이름을 모두 입력해주세요.");
+      showAlert("입력 오류", "이메일과 이름을 모두 입력해주세요.");
       return;
     }
 

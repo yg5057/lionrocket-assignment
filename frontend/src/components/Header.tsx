@@ -1,16 +1,18 @@
 import { useNavigate, Link } from "react-router-dom";
 import { storage } from "../services/storage";
 import { Button } from "./ui/button";
+import { useModal } from "../contexts/ModalContext";
 
 export default function Header() {
   const navigate = useNavigate();
+  const { showConfirm } = useModal();
   const user = storage.getUser();
 
   const handleLogout = () => {
-    if (confirm("정말 로그아웃 하시겠습니까?")) {
+    showConfirm("로그아웃", "정말 로그아웃 하시겠습니까?", () => {
       storage.clearUser();
       navigate("/login");
-    }
+    });
   };
 
   return (
