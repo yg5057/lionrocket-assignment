@@ -77,7 +77,7 @@ export default function Dashboard() {
                       <span className="truncate">{char.name}</span>
                       {char.isDefault && (
                         <span className="text-[10px] bg-blue-100 text-blue-600 border-blue-200 dark:bg-blue-900/40 dark:text-blue-300 dark:border-blue-800 px-2 py-1 rounded-full border font-normal shrink-0 ml-2">
-                          Official
+                          Default
                         </span>
                       )}
                     </CardTitle>

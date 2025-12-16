@@ -124,18 +124,25 @@ export default function Profile() {
                   어두운 테마를 적용하여 눈의 피로를 줄입니다.
                 </p>
               </div>
-              <Switch checked={isDarkMode} onCheckedChange={setIsDarkMode} />
+              <Switch
+                checked={isDarkMode}
+                onCheckedChange={setIsDarkMode}
+                className="cursor-pointer"
+              />
             </div>
           </CardContent>
 
           <CardFooter className="flex flex-col gap-3">
-            <Button onClick={handleSave} className="w-full text-base">
+            <Button
+              onClick={handleSave}
+              className="w-full text-base cursor-pointer"
+            >
               저장하기
             </Button>
             <Button
               variant="outline"
               onClick={handleLogout}
-              className="w-full text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 dark:border-gray-600"
+              className="w-full text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 dark:border-gray-600 cursor-pointer"
             >
               로그아웃
             </Button>
