@@ -2,6 +2,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { storage } from "../services/storage";
 import { Button } from "./ui/button";
 import { useModal } from "../contexts/ModalContext";
+import Breadcrumbs from "./Breadcumbs";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ export default function Header() {
   };
 
   return (
-    <header className="border-b bg-white">
+    <header className="border-b bg-white flex-col">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Link
           to="/dashboard"
@@ -24,7 +25,6 @@ export default function Header() {
         >
           AI Chat
         </Link>
-
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">
           <Link to="/dashboard" className="hover:text-primary transition">
             대시보드
@@ -36,7 +36,6 @@ export default function Header() {
             프로필
           </Link>
         </nav>
-
         <div className="flex items-center gap-4">
           <span className="text-sm text-gray-500 hidden sm:inline">
             반가워요,{" "}
@@ -46,6 +45,9 @@ export default function Header() {
             로그아웃
           </Button>
         </div>
+      </div>
+      <div className="container mx-auto px-4 py-2 bg-gray-50/50 border-t text-sm">
+        <Breadcrumbs />
       </div>
     </header>
   );
