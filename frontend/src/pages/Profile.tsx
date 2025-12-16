@@ -64,7 +64,6 @@ export default function Profile() {
     } else {
       document.documentElement.classList.remove("dark");
     }
-
     showAlert("성공", "프로필 정보가 저장되었습니다.");
   };
 
