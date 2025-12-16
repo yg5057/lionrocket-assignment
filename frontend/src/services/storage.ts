@@ -67,6 +67,14 @@ export const storage = {
     localStorage.setItem(KEYS.CHARACTERS, JSON.stringify(updated));
   },
 
+  updateCharacter: (updatedChar: Character) => {
+    const current = storage.getCharacters();
+    const updated = current.map((char) =>
+      char.id === updatedChar.id ? updatedChar : char
+    );
+    localStorage.setItem(KEYS.CHARACTERS, JSON.stringify(updated));
+  },
+
   getMessages: (characterId: string): Message[] => {
     const key = `${KEYS.CHATS}${characterId}`;
     const data = localStorage.getItem(key);
