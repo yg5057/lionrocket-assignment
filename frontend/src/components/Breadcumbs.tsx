@@ -24,12 +24,15 @@ export default function Breadcrumbs() {
   };
 
   return (
-    <nav className="text-sm text-gray-500 mb-4" aria-label="Breadcrumb">
+    <nav
+      className="text-sm text-gray-500 dark:text-gray-400 mb-4"
+      aria-label="Breadcrumb"
+    >
       <ol className="list-none p-0 inline-flex">
         <li className="flex items-center">
           <Link
             to="/dashboard"
-            className="hover:text-blue-600 transition-colors cursor-pointer"
+            className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer"
           >
             Home
           </Link>
@@ -40,13 +43,15 @@ export default function Breadcrumbs() {
           const name = getReadableName(value, index);
           return (
             <li key={to} className="flex items-center">
-              <span className="mx-2 text-gray-400">/</span>
+              <span className="mx-2 text-gray-400 dark:text-gray-600">/</span>
               {isLast ? (
-                <span className="font-medium text-gray-800">{name}</span>
+                <span className="font-medium text-gray-800 dark:text-gray-200">
+                  {name}
+                </span>
               ) : (
                 <Link
                   to={to}
-                  className="hover:text-blue-600 transition-colors cursor-pointer"
+                  className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer"
                 >
                   {name}
                 </Link>

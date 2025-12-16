@@ -43,12 +43,16 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
       <Header />
       <main className="container mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2 text-gray-800">대시보드</h1>
-          <p className="text-gray-500">대화하고 싶은 AI 캐릭터를 선택하세요.</p>
+          <h1 className="text-3xl font-bold mb-2 text-gray-800 dark:text-white">
+            대시보드
+          </h1>
+          <p className="text-gray-500 dark:text-gray-400">
+            대화하고 싶은 AI 캐릭터를 선택하세요.
+          </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {characters.map((char) => {
@@ -56,10 +60,10 @@ export default function Dashboard() {
             return (
               <Card
                 key={char.id}
-                className="hover:shadow-lg transition-shadow duration-200 flex flex-col"
+                className="hover:shadow-lg transition-all duration-200 flex flex-col dark:bg-gray-800 dark:border-gray-700"
               >
                 <CardHeader className="flex flex-row items-center gap-4 pb-4">
-                  <div className="w-14 h-14 rounded-full overflow-hidden border border-gray-200 bg-white shadow-sm shrink-0">
+                  <div className="w-14 h-14 rounded-full overflow-hidden border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 shadow-sm shrink-0">
                     <img
                       src={char.thumbnail || "https://via.placeholder.com/100"}
                       alt={char.name}
@@ -72,41 +76,43 @@ export default function Dashboard() {
                     <CardTitle className="flex items-center justify-between text-lg">
                       <span className="truncate">{char.name}</span>
                       {char.isDefault && (
-                        <span className="text-[10px] bg-blue-100 text-blue-600 px-2 py-1 rounded-full border border-blue-200 font-normal shrink-0 ml-2">
-                          Official
+                        <span className="text-[10px] bg-blue-100 text-blue-600 border-blue-200 dark:bg-blue-900/40 dark:text-blue-300 dark:border-blue-800 px-2 py-1 rounded-full border font-normal shrink-0 ml-2">
+                          Default
                         </span>
                       )}
                     </CardTitle>
-                    <p className="text-sm text-gray-400 font-normal line-clamp-1 break-all">
+                    <p className="text-sm text-gray-400 dark:text-gray-500 font-normal line-clamp-1 break-all">
                       {char.description}
                     </p>
                   </div>
                 </CardHeader>
                 <CardContent className="flex-1 py-4">
-                  <div className="bg-gray-100/80 p-4 rounded-lg text-sm h-28 overflow-hidden relative border border-gray-100">
+                  <div className="bg-gray-100/80 dark:bg-gray-900/50 p-4 rounded-lg text-sm h-28 overflow-hidden relative border border-gray-100 dark:border-gray-700/50">
                     {lastMsg ? (
                       <>
-                        <div className="flex justify-between items-center mb-2 pb-2 border-b border-gray-200/60">
+                        <div className="flex justify-between items-center mb-2 pb-2 border-b border-gray-200/60 dark:border-gray-700">
                           <span
                             className={`font-bold ${
                               lastMsg.role === "user"
-                                ? "text-blue-600"
-                                : "text-purple-600"
+                                ? "text-blue-600 dark:text-blue-400"
+                                : "text-purple-600 dark:text-purple-400"
                             }`}
                           >
                             {lastMsg.role === "user" ? "나" : char.name}
                           </span>
-                          <span className="text-xs text-gray-400">
+                          <span className="text-xs text-gray-400 dark:text-gray-500">
                             {formatTime(lastMsg.timestamp)}
                           </span>
                         </div>
-                        <p className="text-gray-600 line-clamp-3 leading-relaxed">
+                        <p className="text-gray-600 dark:text-gray-300 line-clamp-3 leading-relaxed">
                           {lastMsg.content}
                         </p>
                       </>
                     ) : (
-                      <div className="h-full flex flex-col items-center justify-center text-gray-400 text-center space-y-2">
-                        <span className="text-2xl">👋</span>
+                      <div className="h-full flex flex-col items-center justify-center text-gray-400 dark:text-gray-600 text-center space-y-2">
+                        <span className="text-2xl grayscale opacity-70">
+                          👋
+                        </span>
                         <span className="text-xs">
                           아직 대화 내역이 없어요.
                           <br />첫 인사를 건네보세요!
@@ -119,7 +125,7 @@ export default function Dashboard() {
                   <Link to={`/chat/${char.id}`} className="w-full">
                     <Button
                       className={`w-full cursor-pointer ${
-                        lastMsg ? "bg-primary" : "bg-gray-800 hover:bg-gray-700"
+                        lastMsg ? "bg-primary" : "bg-gray-600 hover:bg-gray-400"
                       }`}
                     >
                       {lastMsg ? "대화 이어하기 💬" : "새 대화 시작하기 ✨"}

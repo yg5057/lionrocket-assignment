@@ -30,8 +30,11 @@ app.post("/api/chat", async (req, res) => {
 
     res.json({ content: response.content[0].text });
   } catch (error) {
-    console.error("Error calling Claude API:", error);
-    res.status(500).json({ error: "Failed to fetch response from Claude API" });
+    console.error("❌ Error calling Claude API:", error);
+    res.status(500).json({
+      error: "Failed to fetch response from Claude API",
+      details: error.messages,
+    });
   }
 });
 
