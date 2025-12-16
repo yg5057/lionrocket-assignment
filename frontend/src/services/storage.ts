@@ -107,3 +107,10 @@ export const storage = {
     localStorage.removeItem(key);
   },
 };
+
+// 탭 간 실시간 동기화
+window.addEventListener("storage", (event) => {
+  if (event.key === KEYS.USER) {
+    window.location.reload();
+  }
+});
