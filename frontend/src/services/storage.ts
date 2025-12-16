@@ -12,6 +12,7 @@ const DEFAULT_CHARACTERS: Character[] = [
     name: "친절한 AI",
     description: "무엇이든 친절하게 답변해주는 기본 AI입니다.",
     systemPrompt: "당신은 도움이 되고 친절한 AI 어시스턴트입니다.",
+    thumbnail: "https://api.dicebear.com/7.x/bottts/svg?seed=kind",
     isDefault: true,
   },
   {
@@ -20,6 +21,7 @@ const DEFAULT_CHARACTERS: Character[] = [
     description: "말끝마다 냥을 붙이는 귀여운 고양이입니다.",
     systemPrompt:
       '당신은 고양이입니다. 모든 문장의 끝을 "다냥" 또는 "냥"으로 끝내세요. 조금 도도하게 행동하세요.',
+    thumbnail: "https://api.dicebear.com/7.x/fun-emoji/svg?seed=cat",
     isDefault: true,
   },
   {
@@ -28,6 +30,7 @@ const DEFAULT_CHARACTERS: Character[] = [
     description: "한국말을 영어로 번역해주고 교정해줍니다.",
     systemPrompt:
       "당신은 영어 교육 전문가입니다. 사용자가 입력한 한국어를 자연스러운 영어로 번역하고, 문법적 설명을 덧붙이세요.",
+    thumbnail: "https://api.dicebear.com/7.x/avataaars/svg?seed=teacher",
     isDefault: true,
   },
 ];
@@ -65,10 +68,21 @@ export const storage = {
     const current = storage.getCharacters();
     const updated = current.filter((char) => char.id !== id || char.isDefault);
     localStorage.setItem(KEYS.CHARACTERS, JSON.stringify(updated));
+
+    // 캐릭터 삭제시 대화내역도 같이 삭제
+    if (updated.length < current.length) {
+      localStorage.removeItem(`${KEYS.CHATS}${id}`);
+    }
   },
 
   updateCharacter: (updatedChar: Character) => {
     const current = storage.getCharacters();
+    const target = current.find((c) => c.id === updatedChar.id);
+    if (target?.isDefault) {
+      console.warn("기본 캐릭터는 수정할 수 없습니다.");
+      return;
+    }
+
     const updated = current.map((char) =>
       char.id === updatedChar.id ? updatedChar : char
     );
