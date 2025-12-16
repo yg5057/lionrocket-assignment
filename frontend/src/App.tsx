@@ -7,6 +7,7 @@ const Login = lazy(() => import("./pages/Login"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const ChatRoom = lazy(() => import("./pages/ChatRoom.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
+const CharacterManage = lazy(() => import("./pages/CharacterManage.tsx"));
 
 const Loading = () => (
   <div className="flex h-screen items-center justify-center">
@@ -21,7 +22,6 @@ function App() {
         <Suspense fallback={<Loading />}>
           <Routes>
             <Route path="/login" element={<Login />} />
-
             <Route
               path="/dashboard"
               element={
@@ -30,7 +30,6 @@ function App() {
                 </ProtectedRoute>
               }
             />
-
             <Route
               path="/chat/:id"
               element={
@@ -39,7 +38,14 @@ function App() {
                 </ProtectedRoute>
               }
             />
-
+            <Route
+              path="/characters"
+              element={
+                <ProtectedRoute>
+                  <CharacterManage />
+                </ProtectedRoute>
+              }
+            />
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

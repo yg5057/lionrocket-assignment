@@ -41,7 +41,12 @@ export default function Header() {
             반가워요,{" "}
             <span className="font-bold text-gray-800">{user?.name}</span>님
           </span>
-          <Button variant="outline" size="sm" onClick={handleLogout}>
+          <Button
+            variant="outline"
+            size="sm"
+            className="cursor-pointer"
+            onClick={handleLogout}
+          >
             로그아웃
           </Button>
         </div>

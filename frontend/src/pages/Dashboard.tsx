@@ -45,36 +45,43 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
-
       <main className="container mx-auto px-4 py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-2 text-gray-800">대시보드</h1>
           <p className="text-gray-500">대화하고 싶은 AI 캐릭터를 선택하세요.</p>
         </div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {characters.map((char) => {
             const lastMsg = lastMessages[char.id];
-
             return (
               <Card
                 key={char.id}
                 className="hover:shadow-lg transition-shadow duration-200 flex flex-col"
               >
-                <CardHeader className="pb-2">
-                  <CardTitle className="flex items-center justify-between text-xl">
-                    <span>{char.name}</span>
-                    {char.isDefault && (
-                      <span className="text-[10px] bg-blue-100 text-blue-600 px-2 py-1 rounded-full border border-blue-200 font-normal">
-                        Official
-                      </span>
-                    )}
-                  </CardTitle>
-                  <p className="text-sm text-gray-400 font-normal line-clamp-1">
-                    {char.description}
-                  </p>
+                <CardHeader className="flex flex-row items-center gap-4 pb-4">
+                  <div className="w-14 h-14 rounded-full overflow-hidden border border-gray-200 bg-white shadow-sm shrink-0">
+                    <img
+                      src={char.thumbnail || "https://via.placeholder.com/100"}
+                      alt={char.name}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div className="flex flex-col flex-1 gap-1">
+                    <CardTitle className="flex items-center justify-between text-lg">
+                      <span className="truncate">{char.name}</span>
+                      {char.isDefault && (
+                        <span className="text-[10px] bg-blue-100 text-blue-600 px-2 py-1 rounded-full border border-blue-200 font-normal shrink-0 ml-2">
+                          Official
+                        </span>
+                      )}
+                    </CardTitle>
+                    <p className="text-sm text-gray-400 font-normal line-clamp-1 break-all">
+                      {char.description}
+                    </p>
+                  </div>
                 </CardHeader>
-
                 <CardContent className="flex-1 py-4">
                   <div className="bg-gray-100/80 p-4 rounded-lg text-sm h-28 overflow-hidden relative border border-gray-100">
                     {lastMsg ? (
@@ -108,11 +115,10 @@ export default function Dashboard() {
                     )}
                   </div>
                 </CardContent>
-
                 <CardFooter>
                   <Link to={`/chat/${char.id}`} className="w-full">
                     <Button
-                      className={`w-full ${
+                      className={`w-full cursor-pointer ${
                         lastMsg ? "bg-primary" : "bg-gray-800 hover:bg-gray-700"
                       }`}
                     >

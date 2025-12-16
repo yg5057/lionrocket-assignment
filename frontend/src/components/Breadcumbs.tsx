@@ -29,7 +29,7 @@ export default function Breadcrumbs() {
         <li className="flex items-center">
           <Link
             to="/dashboard"
-            className="hover:text-blue-600 transition-colors"
+            className="hover:text-blue-600 transition-colors cursor-pointer"
           >
             Home
           </Link>
@@ -44,7 +44,10 @@ export default function Breadcrumbs() {
               {isLast ? (
                 <span className="font-medium text-gray-800">{name}</span>
               ) : (
-                <Link to={to} className="hover:text-blue-600 transition-colors">
+                <Link
+                  to={to}
+                  className="hover:text-blue-600 transition-colors cursor-pointer"
+                >
                   {name}
                 </Link>
               )}
