@@ -71,11 +71,16 @@ export function ModalProvider({ children }: { children: ReactNode }) {
 
           <DialogFooter className="gap-2 mt-4">
             {config.type === "confirm" && (
-              <Button variant="outline" onClick={handleClose}>
+              <Button
+                variant="outline"
+                className="cursor-pointer"
+                onClick={handleClose}
+              >
                 취소
               </Button>
             )}
             <Button
+              className="cursor-pointer"
               onClick={config.type === "confirm" ? handleConfirm : handleClose}
             >
               확인

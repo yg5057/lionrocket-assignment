@@ -129,7 +129,11 @@ export default function CharacterManage() {
               만들어보세요.
             </p>
           </div>
-          <Button onClick={openCreateModal} size="lg" className="shadow-md">
+          <Button
+            onClick={openCreateModal}
+            size="lg"
+            className="shadow-md cursor-pointer"
+          >
             + 캐릭터 만들기
           </Button>
         </div>
@@ -185,6 +189,7 @@ export default function CharacterManage() {
                             variant="outline"
                             size="sm"
                             onClick={() => openEditModal(char)}
+                            className="cursor-pointer"
                           >
                             수정
                           </Button>
@@ -192,6 +197,7 @@ export default function CharacterManage() {
                             variant="destructive"
                             size="sm"
                             onClick={() => handleDelete(char)}
+                            className="cursor-pointer"
                           >
                             삭제
                           </Button>
@@ -280,10 +286,14 @@ export default function CharacterManage() {
           </div>
 
           <DialogFooter>
-            <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
+            <Button
+              variant="outline"
+              className="cursor-pointer"
+              onClick={() => setIsDialogOpen(false)}
+            >
               취소
             </Button>
-            <Button onClick={handleSave} className="bg-primary">
+            <Button onClick={handleSave} className="bg-primary cursor-pointer">
               {isEditing ? "변경사항 저장" : "캐릭터 생성"}
             </Button>
           </DialogFooter>

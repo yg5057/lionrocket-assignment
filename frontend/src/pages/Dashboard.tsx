@@ -118,7 +118,7 @@ export default function Dashboard() {
                 <CardFooter>
                   <Link to={`/chat/${char.id}`} className="w-full">
                     <Button
-                      className={`w-full ${
+                      className={`w-full cursor-pointer ${
                         lastMsg ? "bg-primary" : "bg-gray-800 hover:bg-gray-700"
                       }`}
                     >
