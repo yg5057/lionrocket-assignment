@@ -109,11 +109,10 @@ export default function ChatRoom() {
   if (!character) return null;
 
   return (
-    <div className="flex flex-col h-screen bg-gray-50">
+    <div className="flex flex-col h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
       <Header />
-
-      <div className="bg-white border-b px-4 py-3 flex items-center shadow-sm shrink-0">
-        <div className="w-10 h-10 rounded-full overflow-hidden border mr-3">
+      <div className="bg-white dark:bg-gray-950 border-b dark:border-gray-800 px-4 py-3 flex items-center shadow-sm shrink-0">
+        <div className="w-10 h-10 rounded-full overflow-hidden border dark:border-gray-700 mr-3">
           <img
             src={character.thumbnail}
             alt={character.name}
@@ -121,14 +120,18 @@ export default function ChatRoom() {
           />
         </div>
         <div>
-          <h2 className="font-bold text-lg leading-none">{character.name}</h2>
-          <p className="text-xs text-gray-500 mt-1">{character.description}</p>
+          <h2 className="font-bold text-lg leading-none dark:text-white">
+            {character.name}
+          </h2>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            {character.description}
+          </p>
         </div>
       </div>
 
       <div className="flex-1 overflow-y-auto p-4 space-y-4" ref={scrollRef}>
         {messages.length === 0 && (
-          <div className="text-center text-gray-400 mt-10">
+          <div className="text-center text-gray-400 dark:text-gray-500 mt-10">
             <p>대화 내용이 없습니다.</p>
             <p className="text-sm">첫 인사를 건네보세요!</p>
           </div>
@@ -145,12 +148,12 @@ export default function ChatRoom() {
               className={`max-w-[70%] px-4 py-3 rounded-2xl text-sm leading-relaxed shadow-sm whitespace-pre-wrap ${
                 msg.role === "user"
                   ? "bg-blue-600 text-white rounded-tr-none"
-                  : "bg-white border text-gray-800 rounded-tl-none"
+                  : "bg-white dark:bg-gray-800 border dark:border-gray-700 text-gray-800 dark:text-gray-100 rounded-tl-none"
               }`}
             >
               {msg.content}
             </div>
-            <span className="text-[10px] text-gray-400 self-end ml-1 mr-1 mb-1">
+            <span className="text-[10px] text-gray-400 dark:text-gray-500 self-end ml-1 mr-1 mb-1">
               {new Date(msg.timestamp).toLocaleTimeString([], {
                 hour: "2-digit",
                 minute: "2-digit",
@@ -161,7 +164,7 @@ export default function ChatRoom() {
 
         {isLoading && (
           <div className="flex justify-start">
-            <div className="bg-gray-200 text-gray-500 px-4 py-3 rounded-2xl rounded-tl-none text-sm flex items-center gap-2">
+            <div className="bg-gray-200 dark:bg-gray-800 text-gray-500 dark:text-gray-300 px-4 py-3 rounded-2xl rounded-tl-none text-sm flex items-center gap-2">
               <Loader2 className="w-4 h-4 animate-spin" />
               AI가 생각 중입니다...
             </div>
@@ -169,7 +172,7 @@ export default function ChatRoom() {
         )}
       </div>
 
-      <div className="p-4 bg-white border-t shrink-0">
+      <div className="p-4 bg-white dark:bg-gray-950 border-t dark:border-gray-800 shrink-0">
         <form onSubmit={handleSend} className="flex gap-2 max-w-4xl mx-auto">
           <Input
             ref={inputRef}
@@ -178,12 +181,12 @@ export default function ChatRoom() {
             placeholder="메시지를 입력하세요 (200자 이내)..."
             maxLength={200}
             disabled={isLoading}
-            className="flex-1"
+            className="flex-1 dark:bg-gray-900 dark:border-gray-700 dark:text-white"
           />
           <Button
             type="submit"
             disabled={isLoading || !input.trim()}
-            className="px-6"
+            className="px-6 cursor-pointer"
           >
             {isLoading ? (
               <Loader2 className="w-4 h-4 animate-spin" />
